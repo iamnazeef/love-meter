@@ -56,7 +56,8 @@ Only include positive things. Do not include anything negative.`;
     console.log("HuggingFace response:", raw);
 
     try {
-      const data = JSON.parse(raw);
+      const cleaned = raw.replace(/```(?:json)?\s*/g, "").trim();
+      const data = JSON.parse(cleaned);
       return NextResponse.json({
         ...base,
         percentage: Math.min(99, Math.max(60, Number(data.percentage) || 75)),
