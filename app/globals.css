@@ -1,26 +1,61 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: #ffffff;
+  --color-foreground: #171717;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Loading pulse heart */
+.heart-pulse {
+  width: 60px;
+  height: 55px;
+  position: relative;
+  animation: pulse 0.8s ease-in-out infinite;
+}
+
+.heart-pulse::before,
+.heart-pulse::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 30px;
+  height: 48px;
+  background: #e8234a;
+  border-radius: 30px 30px 0 0;
+}
+
+.heart-pulse::before {
+  left: 30px;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+.heart-pulse::after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* React Day Picker theme overrides */
+.love-calendar {
+  --rdp-accent-color: #ec4899;
+  --rdp-accent-background-color: rgba(236, 72, 153, 0.2);
+}
+
+/* Hide the month/year text label next to dropdowns */
+.love-calendar .rdp-month_caption > span,
+.love-calendar .rdp-caption_label,
+.love-calendar .rdp-month_caption > :not(.rdp-dropdowns) {
+  display: none !important;
 }
