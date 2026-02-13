@@ -23,6 +23,12 @@ export default function ResultModal({ result, name1, name2, onClose }: ResultMod
     el.style.maxHeight = "none";
     el.style.overflow = "visible";
 
+    // Show CTA, hide buttons for screenshot
+    const shareHides = el.querySelectorAll<HTMLElement>(".share-hide");
+    const shareShows = el.querySelectorAll<HTMLElement>(".share-show");
+    shareHides.forEach((e) => (e.style.display = "none"));
+    shareShows.forEach((e) => (e.style.display = "block"));
+
     const dataUrl = await toPng(el, {
       backgroundColor: "#1a0a10",
       pixelRatio: 2,
@@ -30,6 +36,8 @@ export default function ResultModal({ result, name1, name2, onClose }: ResultMod
 
     el.style.maxHeight = prevMaxH;
     el.style.overflow = prevOverflow;
+    shareHides.forEach((e) => (e.style.display = ""));
+    shareShows.forEach((e) => (e.style.display = ""));
 
     const res = await fetch(dataUrl);
     const blob = await res.blob();
@@ -39,7 +47,7 @@ export default function ResultModal({ result, name1, name2, onClose }: ResultMod
     if (navigator.share && navigator.canShare?.({ files: [file] })) {
       await navigator.share({
         title: "Love Compatibility Result",
-        text: `${name1} & ${name2} — ${result.percentage}% compatible!`,
+        text: `${name1} & ${name2} — ${result.percentage}% compatible!\n\nTry yours now: https://love-meterr.vercel.app/`,
         files: [file],
       });
     } else {
@@ -108,6 +116,12 @@ export default function ResultModal({ result, name1, name2, onClose }: ResultMod
             </ul>
           </div>
         )}
+
+        {/* CTA for shared image */}
+        <div className="share-show mb-6 hidden rounded-xl bg-pink-500/20 px-4 py-3 text-sm">
+          <p className="font-semibold text-pink-300">Try yours now!</p>
+          <p className="text-white/70">love-meterr.vercel.app</p>
+        </div>
 
         {/* Action buttons */}
         <div className="flex items-center justify-center gap-3">

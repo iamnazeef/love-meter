@@ -111,9 +111,22 @@ export default function CalculateButton({ onClick, disabled, isReady }: Calculat
             <motion.div
               key="happy"
               initial={{ scale: 0.8, opacity: 0, rotate: -10 }}
-              animate={{ scale: 1, opacity: 1, rotate: 0 }}
+              animate={{
+                scale: [1, 1.15, 1, 1.1, 1],
+                opacity: 1,
+                rotate: 0,
+              }}
               exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.4, ease: "backOut" }}
+              transition={{
+                scale: {
+                  duration: 0.8,
+                  repeat: Infinity,
+                  repeatDelay: 0.4,
+                  ease: "easeInOut",
+                },
+                opacity: { duration: 0.4, ease: "backOut" },
+                rotate: { duration: 0.4, ease: "backOut" },
+              }}
               className="h-full w-full"
             >
               <HappyFace />
@@ -140,7 +153,7 @@ export default function CalculateButton({ onClick, disabled, isReady }: Calculat
           animate={{ opacity: 1 }}
           className="mt-1 text-xs font-bold uppercase tracking-widest text-pink-200 md:text-sm"
         >
-          Calculate Love
+          Click to Calculate Love
         </motion.span>
       )}
     </motion.button>
