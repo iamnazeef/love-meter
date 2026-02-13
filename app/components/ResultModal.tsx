@@ -17,10 +17,19 @@ export default function ResultModal({ result, name1, name2, onClose }: ResultMod
   const handleShare = useCallback(async () => {
     if (!cardRef.current) return;
 
-    const dataUrl = await toPng(cardRef.current, {
+    const el = cardRef.current;
+    const prevMaxH = el.style.maxHeight;
+    const prevOverflow = el.style.overflow;
+    el.style.maxHeight = "none";
+    el.style.overflow = "visible";
+
+    const dataUrl = await toPng(el, {
       backgroundColor: "#1a0a10",
       pixelRatio: 2,
     });
+
+    el.style.maxHeight = prevMaxH;
+    el.style.overflow = prevOverflow;
 
     const res = await fetch(dataUrl);
     const blob = await res.blob();
