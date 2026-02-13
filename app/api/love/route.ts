@@ -53,7 +53,6 @@ Only include positive things. Do not include anything negative.`;
     });
 
     const raw = completion.choices[0]?.message?.content ?? "";
-    console.log("HuggingFace response:", raw);
 
     try {
       const cleaned = raw.replace(/```(?:json)?\s*/g, "").trim();
