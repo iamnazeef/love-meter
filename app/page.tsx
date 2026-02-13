@@ -20,7 +20,7 @@ export default function Home() {
 
   return (
     <div
-      className="relative flex min-h-screen items-center justify-center"
+      className="relative flex min-h-screen flex-col items-center justify-center"
       style={{
         backgroundImage: "url(/bg.jpg)",
         backgroundSize: "cover",
@@ -32,7 +32,7 @@ export default function Home() {
       <div className="absolute inset-0 bg-black/40" />
 
       {/* Content */}
-      <div className="relative z-10 flex w-full max-w-4xl flex-col items-center gap-6 px-6 py-12 md:flex-row md:items-center md:justify-center md:gap-8">
+      <div className="relative z-10 my-auto flex w-full max-w-4xl flex-col items-center gap-6 px-6 py-12 md:flex-row md:items-center md:justify-center md:gap-8">
         <PersonForm
           label="His"
           name={name1}
@@ -53,6 +53,19 @@ export default function Home() {
           index={1}
         />
       </div>
+
+      {/* Footer */}
+      <footer className="relative z-10 mt-auto pb-4 pt-8 text-center text-sm text-white/50">
+        Developed by{" "}
+        <a
+          href="https://github.com/iamnazeef"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-pink-300/70 underline underline-offset-2 hover:text-pink-300"
+        >
+          Nazeef
+        </a>
+      </footer>
 
       {loading && <LoadingOverlay />}
 
